@@ -44,6 +44,11 @@ export interface JobAnalysis {
   documents: (string | null)[] | null;
   stages: (string | null)[] | null;
   essay_questions?: EssayQuestionItem[] | null;
+  /** 공고가 여러 직렬로 나뉜 경우 전체 직렬 목록 (직렬 선택 화면용) */
+  available_tracks?: (string | null)[] | null;
+  track_info?: { track: string | null; description: string | null }[] | null;
+  track_series?: { track: string | null; series: (string | null)[] | null }[] | null;
+  available_series?: (string | null)[] | null;
 }
 
 export type ApplicationStatus =

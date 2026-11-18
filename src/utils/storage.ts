@@ -785,3 +785,8 @@ export function persistSpecRecommendationCache(
 }
 
 
+
+/** 앱에 기본으로 들어 있는 체험용 샘플 공고인지 (실제 채용 공고가 아님) */
+export function isSampleAnnouncementId(id?: string | null): boolean {
+  return typeof id === 'string' && id.startsWith('sample-');
+}

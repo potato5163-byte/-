@@ -16,6 +16,11 @@ import { SavedListView } from './components/SavedListView';
 import { RecommendView } from './components/RecommendView';
 import { SpecProfileModal } from './components/SpecProfileModal';
 import { GuideModal } from './components/GuideModal';
+import {
+  SeriesPickerModal,
+  type SeriesSelection,
+  type TrackSeriesEntry,
+} from './components/SeriesPickerModal';
 import { Mascot } from './components/Mascot';
 import type {
   ApplicationStatus,
@@ -43,6 +48,7 @@ import {
   persistSpecProfileMeta,
   persistSpecRecommendationCache,
   persistSpecSkills,
+  isSampleAnnouncementId,
   type GonggoBackupPayload,
 } from './utils/storage';
 
@@ -90,6 +96,13 @@ export default function App() {
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
   const [companyTypeHint, setCompanyTypeHint] = useState<CompanyTypeHint>('auto');
   const [isLoading, setIsLoading] = useState(false);
+  const [seriesPrompt, setSeriesPrompt] = useState<{
+    payload: JobAnalysis;
+    tracks: string[];
+    trackSeries: TrackSeriesEntry[];
+    trackDescriptions: Record<string, string>;
+    list: string[];
+  } | null>(null);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   // Active result context (either newly analyzed or opened from SavedListView)
@@ -327,7 +340,27 @@ export default function App() {
     setIsLoading(false);
   };
 
-  const handleAnalyze = async () => {
+  const applyAnalysisResult = (result: JobAnalysis) => {
+    setAnalysisResult(result);
+    setResultOriginalText(inputText);
+    setResultAttachedFileName(
+      selectedFiles.length > 0 ? selectedFiles.map((f) => f.name).join(', ') : null
+    );
+    setTempSourceUrl(inputSourceUrl);
+    setTempCheckedDocs({});
+    setTempStatus('지원 예정');
+    setTempMemo('');
+    setTempEssayDrafts({});
+    setTempInterviewNotes({});
+    setTempBonusOverrides({});
+    setActiveSavedId(null);
+    setOpenInEditMode(false);
+    setResultOrigin('input');
+    setScreen('result');
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleAnalyze = async (selection?: SeriesSelection) => {
     const trimmed = inputText.trim();
     if (!trimmed && selectedFiles.length === 0) {
       setErrorMessage('공고 내용을 붙여넣거나 파일을 첨부해 주세요');
@@ -360,6 +393,8 @@ export default function App() {
           text: trimmed,
           files: encodedFiles,
           companyTypeHint,
+          series: selection?.series || undefined,
+          track: selection?.track || undefined,
         }),
         signal: controller.signal,
       });
@@ -378,23 +413,48 @@ export default function App() {
         return;
       }
 
-      setAnalysisResult(payload as JobAnalysis);
-      setResultOriginalText(inputText);
-      setResultAttachedFileName(
-        selectedFiles.length > 0 ? selectedFiles.map((f) => f.name).join(', ') : null
-      );
-      setTempSourceUrl(inputSourceUrl);
-      setTempCheckedDocs({});
-      setTempStatus('지원 예정');
-      setTempMemo('');
-      setTempEssayDrafts({});
-      setTempInterviewNotes({});
-      setTempBonusOverrides({});
-      setActiveSavedId(null);
-      setOpenInEditMode(false);
-      setResultOrigin('input');
-      setScreen('result');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      // 모집전형·모집분야가 2개 이상이고 아직 고르지 않았다면 선택 창을 먼저 띄운다
+      const toList = (v: unknown): string[] =>
+        Array.isArray(v)
+          ? v
+              .filter((s): s is string => typeof s === 'string' && s.trim() !== '')
+              .map((s) => s.trim())
+          : [];
+      const trackList = toList(payload.available_tracks);
+      const seriesList = toList(payload.available_series);
+      const trackSeries: TrackSeriesEntry[] = Array.isArray(payload.track_series)
+        ? (payload.track_series as { track?: unknown; series?: unknown }[])
+            .filter((t) => t && typeof t.track === 'string' && t.track.trim() !== '')
+            .map((t) => ({
+              track: (t.track as string).trim(),
+              series: toList(t.series),
+            }))
+        : [];
+      const trackDescriptions: Record<string, string> = {};
+      if (Array.isArray(payload.track_info)) {
+        for (const t of payload.track_info as { track?: unknown; description?: unknown }[]) {
+          if (
+            t &&
+            typeof t.track === 'string' &&
+            typeof t.description === 'string' &&
+            t.description.trim() !== ''
+          ) {
+            trackDescriptions[t.track.trim()] = t.description.trim();
+          }
+        }
+      }
+      if (!selection && (trackList.length >= 2 || seriesList.length >= 2)) {
+        setSeriesPrompt({
+          payload: payload as JobAnalysis,
+          tracks: trackList,
+          trackSeries,
+          trackDescriptions,
+          list: seriesList,
+        });
+        return;
+      }
+
+      applyAnalysisResult(payload as JobAnalysis);
     } catch (err) {
       if (userCancelledAnalyzeRef.current) {
         return;
@@ -1188,6 +1248,7 @@ export default function App() {
             sourceUrl={displayedSourceUrl}
             onChangeSourceUrl={handleChangeSourceUrl}
             isSaved={isSaved}
+            isSample={isSampleAnnouncementId(activeSavedId)}
             onToggleSave={handleToggleSave}
             onUpdateAnalysis={handleUpdateAnalysis}
             checkedDocs={displayedCheckedDocs}
@@ -1281,7 +1342,7 @@ export default function App() {
             onChangeSourceUrl={setInputSourceUrl}
             urgentNotices={urgentNotices}
             onOpenUrgentAnnouncement={handleSelectSavedAnnouncement}
-            onAnalyze={handleAnalyze}
+            onAnalyze={() => handleAnalyze()}
             onCancelAnalyze={handleCancelAnalyze}
             isLoading={isLoading}
             errorMessage={errorMessage}
@@ -1386,6 +1447,27 @@ export default function App() {
         isOpen={showGuideModal}
         onClose={() => setShowGuideModal(false)}
       />
+
+      {/* 직렬이 여러 개인 공고: 내 직렬 선택 */}
+      {seriesPrompt && (
+        <SeriesPickerModal
+          organization={seriesPrompt.payload.organization}
+          tracks={seriesPrompt.tracks}
+          trackSeries={seriesPrompt.trackSeries}
+          trackDescriptions={seriesPrompt.trackDescriptions}
+          seriesList={seriesPrompt.list}
+          onConfirm={(selection) => {
+            setSeriesPrompt(null);
+            void handleAnalyze(selection);
+          }}
+          onUseMerged={() => {
+            const merged = seriesPrompt.payload;
+            setSeriesPrompt(null);
+            applyAnalysisResult(merged);
+          }}
+          onClose={() => setSeriesPrompt(null)}
+        />
+      )}
 
       {/* 백업 불러오기 방식 선택 모달 (병합 vs 덮어쓰기) */}
       {pendingBackupPayload && (

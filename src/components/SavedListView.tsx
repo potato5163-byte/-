@@ -15,7 +15,7 @@ import {
   type UserProfileMeta,
 } from '../utils/specMatching';
 import { downloadAllSchedulesIcs } from '../utils/calendar';
-import { exportAnnouncementsCsv } from '../utils/storage';
+import { exportAnnouncementsCsv, isSampleAnnouncementId } from '../utils/storage';
 import { Mascot } from './Mascot';
 import { SpecSimulator } from './SpecSimulator';
 
@@ -1211,6 +1211,14 @@ export const SavedListView: React.FC<SavedListViewProps> = ({
                               <h2 className="font-headline-sm text-headline-sm text-on-surface font-semibold truncate leading-snug group-hover/title:text-secondary transition-colors">
                                 {orgName}
                               </h2>
+                              {isSampleAnnouncementId(item.id) && (
+                                <span
+                                  className="shrink-0 px-1.5 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm"
+                                  title="앱에 기본으로 들어 있는 체험용 예시 공고예요. 실제 채용 내용이 아니에요."
+                                >
+                                  샘플
+                                </span>
+                              )}
                               <span className="material-symbols-outlined text-[18px] text-outline group-hover/title:text-secondary group-hover/title:translate-x-0.5 transition-all shrink-0">
                                 chevron_right
                               </span>

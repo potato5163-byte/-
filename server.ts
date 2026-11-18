@@ -22,7 +22,16 @@ const SYSTEM_INSTRUCTION = `너는 한국 공기업·공공기관 및 사기업(
 - keywords에는 지원자가 자기소개서나 면접에서 강조하면 좋을 핵심 역량·가치 키워드 3~5개를 짧은 구문으로 넣어.
 - interview_questions에는 공고의 직무·자격요건·우대사항을 바탕으로 실제 면접에서 나올 만한 예상 질문 3개를 넣어.
 - 항목마다 근거가 된 공고 원문 문장을 source에 그대로 넣어.
+- available_tracks에는 공고의 '모집전형(지원 유형)'을 전부 배열로 넣어(예: 일반, 장애인, 보훈, 지역인재). 전형이 하나뿐이거나 나뉘어 있지 않으면 빈 배열로 둬.
+- track_info에는 모집전형마다 지원자가 이해하기 쉬운 한 줄 설명을 [{"track": "전형명", "description": "설명"}] 형태로 넣어. 공고에 그 전형의 대상·조건 설명이 있으면 그 내용을 쉬운 말로 요약하고(예: '누구나 지원 가능', '지정 자격증 보유자만 지원'), 공고에 없으면 일반적으로 알려진 뜻만 간단히 써. 40자 안팎으로 쓰고, 확실하지 않으면 description을 null로 둬. 지어내지 마.
+- track_series에는 모집전형별로 지원 가능한 모집분야를 [{"track": "전형명", "series": ["분야"]}] 형태로 넣어. 공고에 전형별 모집분야 표가 있으면 그대로 반영하고(전형마다 분야가 다를 수 있음), 전형 구분이 없으면 빈 배열로 둬.
+- available_series에는 공고의 '모집분야(직렬/직군/직무)'를 전부 배열로 넣어(예: 교통안전, 사고조사, 교통교육, 전기, 토목). 하나뿐이거나 나뉘어 있지 않으면 빈 배열로 둬. 모집전형과 모집분야는 서로 다른 축이니 섞지 마.
+- '선택 전형'이나 '선택 직렬(모집분야)'이 주어지면 그 조건 기준으로만 정리해. position에는 '분야명 (전형명)' 형식으로 넣고(둘 중 하나만 있으면 그것만), headcount(해당 전형·분야 인원)·eligibility·bonus_points·tech_skills는 공통 항목 + 해당 전형·분야 전용 항목만 넣고 다른 전형·분야 전용 항목은 빼. 공고의 직렬별 표(응시자격, 자격증·면허, 전공, 가산점·우대 자격증)에서 선택 전형·분야에 해당하는 행을 반드시 찾아 eligibility(자격·면허 요건)와 bonus_points(자격증 가산점은 points에 점수)에 넣어. available_tracks와 available_series는 공고 전체 목록을 그대로 유지해.
 {
+  "available_tracks": [""],
+  "track_info": [{"track": "", "description": ""}],
+  "track_series": [{"track": "", "series": [""]}],
+  "available_series": [""],
   "company_type": "공기업" | "사기업" | null,
   "organization": "", "position": "",
   "employment_type": "", "experience_level": "", "location": "", "headcount": "", "compensation": "",
@@ -41,6 +50,32 @@ const SYSTEM_INSTRUCTION = `너는 한국 공기업·공공기관 및 사기업(
 const RESPONSE_SCHEMA = {
   type: Type.OBJECT,
   properties: {
+    available_tracks: { type: Type.ARRAY, nullable: true, items: { type: Type.STRING, nullable: true } },
+    track_info: {
+      type: Type.ARRAY,
+      nullable: true,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          track: { type: Type.STRING, nullable: true },
+          description: { type: Type.STRING, nullable: true },
+        },
+        required: ['track', 'description'],
+      },
+    },
+    track_series: {
+      type: Type.ARRAY,
+      nullable: true,
+      items: {
+        type: Type.OBJECT,
+        properties: {
+          track: { type: Type.STRING, nullable: true },
+          series: { type: Type.ARRAY, nullable: true, items: { type: Type.STRING, nullable: true } },
+        },
+        required: ['track', 'series'],
+      },
+    },
+    available_series: { type: Type.ARRAY, nullable: true, items: { type: Type.STRING, nullable: true } },
     company_type: { type: Type.STRING, nullable: true },
     organization: { type: Type.STRING, nullable: true },
     position: { type: Type.STRING, nullable: true },
@@ -129,6 +164,10 @@ const RESPONSE_SCHEMA = {
     },
   },
   required: [
+    'available_tracks',
+    'track_info',
+    'track_series',
+    'available_series',
     'company_type',
     'organization',
     'position',
@@ -404,7 +443,9 @@ function normalizeSchedule(schedule: unknown): unknown {
 
 app.post('/api/analyze', async (req, res) => {
   try {
-    const { text, file, files, companyTypeHint } = req.body ?? {};
+    const { text, file, files, companyTypeHint, series, track } = req.body ?? {};
+    const selectedTrack = typeof track === 'string' ? track.trim().slice(0, 60) : '';
+    const selectedSeries = typeof series === 'string' ? series.trim().slice(0, 60) : '';
     const trimmedText = typeof text === 'string' ? text.trim() : '';
 
     const rawFileList = Array.isArray(files) ? files : file ? [file] : [];
@@ -455,9 +496,13 @@ app.post('/api/analyze', async (req, res) => {
     }
 
     const hintInstruction =
-      companyTypeHint === '공기업' || companyTypeHint === '사기업'
+      (companyTypeHint === '공기업' || companyTypeHint === '사기업'
         ? `참고: 사용자는 이 공고를 '${companyTypeHint}' 공고로 선택했습니다. `
-        : '';
+        : '') +
+      (selectedTrack ? `선택 전형: ${JSON.stringify(selectedTrack)}. ` : '') +
+      (selectedSeries
+        ? `선택 직렬(모집분야): ${JSON.stringify(selectedSeries)}. `
+        : '');
 
     if (trimmedText) {
       parts.push({
@@ -477,6 +522,16 @@ app.post('/api/analyze', async (req, res) => {
     let lastError: unknown = null;
     let rawText = '';
 
+    const startedAt = Date.now();
+    // 구글 AI가 일시 과부하(503)면 잠깐 기다렸다가 한 번 더 시도한다.
+    // (브라우저가 55초에 포기하므로 첫 시도가 빨리 실패했을 때만 재시도)
+    for (let attempt = 0; attempt < 2 && !rawText; attempt++) {
+      if (attempt === 1) {
+        const prev = String((lastError as Error)?.message ?? lastError ?? "");
+        const overloaded = prev.includes("503") || prev.includes("UNAVAILABLE");
+        if (!overloaded || Date.now() - startedAt > 15000) break;
+        await new Promise((r) => setTimeout(r, 2500));
+      }
     for (const { model, thinkingLevel } of modelsToTry) {
       try {
         const response = await ai.models.generateContent({
@@ -508,6 +563,7 @@ app.post('/api/analyze', async (req, res) => {
           throw err;
         }
       }
+    }
     }
 
     if (!rawText) {

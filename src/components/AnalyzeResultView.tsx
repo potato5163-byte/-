@@ -34,6 +34,20 @@ export interface AnalysisUpdateMeta {
   sourceUrl?: string | null;
 }
 
+// 공고에 자소서 문항이 없을 때 보여주는 "예시" 주제 (실제 문항이 아님)
+const EXAMPLE_ESSAY_PUBLIC = [
+  '우리 기관에 지원한 동기와 입사 후 이루고 싶은 목표를 기술하시오.',
+  '지원 직무를 수행하기 위해 쌓아온 역량과 경험을 구체적으로 기술하시오.',
+  '조직 안에서 협업하며 갈등을 해결하고 성과를 낸 경험을 기술하시오.',
+  '공공기관 직원으로서 원칙과 윤리를 지켜 행동한 경험을 기술하시오.',
+];
+const EXAMPLE_ESSAY_PRIVATE = [
+  '우리 회사에 지원한 이유와 입사 후 포부를 기술하시오.',
+  '지원 직무와 관련해 본인이 수행한 프로젝트와 그 안에서의 역할을 기술하시오.',
+  '가장 도전적이었던 경험과 그 결과를 구체적으로 기술하시오.',
+  '팀에서 의견 차이를 조율해 성과를 만든 경험을 기술하시오.',
+];
+
 interface AnalyzeResultViewProps {
   data: JobAnalysis;
   originalText: string;
@@ -41,6 +55,8 @@ interface AnalyzeResultViewProps {
   sourceUrl?: string | null;
   onChangeSourceUrl: (url: string | null) => void;
   isSaved: boolean;
+  /** 체험용 샘플 공고 여부 (실제 채용 내용이 아님을 안내) */
+  isSample?: boolean;
   onToggleSave: () => void;
   onUpdateAnalysis: (updated: JobAnalysis, meta?: AnalysisUpdateMeta) => void;
   checkedDocs: Record<number, boolean>;
@@ -186,6 +202,7 @@ function buildAnnouncementSummaryText(params: {
     data.compensation,
   ]
     .filter(Boolean)
+    .filter((v, i, a) => a.indexOf(v) === i)
     .join(' · ');
   if (meta) lines.push(`- 기본정보: ${meta}`);
 
@@ -448,6 +465,7 @@ export const AnalyzeResultView: React.FC<AnalyzeResultViewProps> = ({
   sourceUrl,
   onChangeSourceUrl,
   isSaved,
+  isSample = false,
   onToggleSave,
   onUpdateAnalysis,
   checkedDocs,
@@ -1178,6 +1196,17 @@ export const AnalyzeResultView: React.FC<AnalyzeResultViewProps> = ({
           </div>
         ) : (
           <>
+            {isSample && (
+              <div className="mb-3 flex items-start gap-2 rounded-xl bg-surface-container-high px-3 py-2.5">
+                <span className="shrink-0 px-1.5 py-0.5 rounded-md bg-surface-container-lowest text-on-surface-variant font-label-sm text-label-sm">
+                  샘플
+                </span>
+                <p className="font-label-sm text-label-sm text-on-surface-variant font-normal">
+                  앱에 기본으로 들어 있는 체험용 예시 공고예요. 실제 채용 내용(일정·자격·자소서 문항)이
+                  아니니 지원에 참고하지 마세요.
+                </p>
+              </div>
+            )}
             <div className="flex items-start justify-between gap-3 mb-3">
               <div className="min-w-0 flex-1">
                 <p className="font-label-sm text-label-sm text-on-surface-variant mb-1 truncate">
@@ -1202,6 +1231,7 @@ export const AnalyzeResultView: React.FC<AnalyzeResultViewProps> = ({
                       data.headcount,
                     ]
                       .filter(Boolean)
+                      .filter((v, i, a) => a.indexOf(v) === i) // 같은 값(예: 신입·신입)은 한 번만
                       .map((meta, i, arr) => (
                         <React.Fragment key={i}>
                           <span>{meta}</span>
@@ -2039,6 +2069,48 @@ export const AnalyzeResultView: React.FC<AnalyzeResultViewProps> = ({
           </div>
         )}
       </div>
+
+      {/* 카드 3-B': 공고에 자소서 문항이 없을 때 — 예시 문항 (실제 문항 아님) */}
+      {!isEditing && essayQuestions.length === 0 && (
+        <div className="brand-card rounded-2xl p-space-md space-y-3">
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2">
+              <span className="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+                <span className="material-symbols-outlined text-[18px]">edit_document</span>
+              </span>
+              <h3 className="font-headline-sm text-headline-sm text-on-surface">
+                자기소개서 문항
+              </h3>
+            </div>
+            <span className="inline-flex items-center gap-1 font-label-sm text-label-sm font-bold text-amber-800 bg-amber-100 border border-amber-300 px-2.5 py-0.5 rounded-full whitespace-nowrap">
+              <span className="material-symbols-outlined text-[14px]">info</span>
+              예시 · 공고에 없음
+            </span>
+          </div>
+          <p className="font-label-sm text-label-sm text-on-surface-variant font-normal">
+            이 공고문에는 자소서 문항이 없어요. 문항은 보통 지원서 작성 화면에서 확인할 수 있고,
+            아래는 {data.company_type === '사기업' ? '민간 기업' : '공기업·공공기관'}에서 자주
+            나오는 주제를 정리한 <b>예시</b>예요. 실제 문항과 다를 수 있으니 연습용으로만
+            참고하세요.
+          </p>
+          <ul className="space-y-1.5">
+            {(data.company_type === '사기업'
+              ? EXAMPLE_ESSAY_PRIVATE
+              : EXAMPLE_ESSAY_PUBLIC
+            ).map((q, i) => (
+              <li
+                key={q}
+                className="flex gap-2 rounded-xl bg-surface-container-low px-3 py-2 font-body-sm text-body-sm text-on-surface-variant"
+              >
+                <span className="shrink-0 font-label-sm text-label-sm text-outline tabular-nums">
+                  예시 {i + 1}
+                </span>
+                <span>{q}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       {/* 카드 3-B: 자기소개서 문항 */}
       {(isEditing || essayQuestions.length > 0) && (
