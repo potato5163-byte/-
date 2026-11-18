@@ -176,7 +176,7 @@ function buildAnnouncementSummaryText(params: {
   const lines: string[] = [];
   const org = data.organization?.trim() || '기관명 미입력';
   const pos = data.position?.trim() || '모집 분야 미정';
-  lines.push(`[공고정리] ${org} - ${pos}`);
+  lines.push(`[공고쏙] ${org} - ${pos}`);
 
   const meta = [
     data.company_type,
@@ -892,7 +892,7 @@ export const AnalyzeResultView: React.FC<AnalyzeResultViewProps> = ({
   };
 
   const handleCopyAllEssayDrafts = () => {
-    const org = data.organization?.trim() || '공고정리';
+    const org = data.organization?.trim() || '공고쏙';
     const blocks = essayQuestions
       .map((eq, idx) => {
         const q = eq.question?.trim() || `문항 ${idx + 1}`;

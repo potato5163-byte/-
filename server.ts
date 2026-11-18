@@ -370,6 +370,38 @@ app.post('/api/fetch-url', async (req, res) => {
   }
 });
 
+// AI가 날짜를 "2026.12.01" 이나 "2026-12-01 ~ 2026-12-15" 처럼 주면 앱이 읽지 못하므로
+// YYYY-MM-DD 한 개씩으로 정리한다. (범위는 시작/마감 두 항목으로 분리)
+function toIsoDate(raw: string): string | null {
+  const m = /(\d{4})\s*[.\-/년]\s*(\d{1,2})\s*[.\-/월]\s*(\d{1,2})/.exec(raw);
+  if (!m) return null;
+  return `${m[1]}-${m[2].padStart(2, '0')}-${m[3].padStart(2, '0')}`;
+}
+
+function normalizeSchedule(schedule: unknown): unknown {
+  if (!Array.isArray(schedule)) return schedule;
+  const out: unknown[] = [];
+  for (const item of schedule) {
+    if (!item || typeof item !== 'object' || typeof (item as any).date !== 'string') {
+      out.push(item);
+      continue;
+    }
+    const it = item as { step: string | null; date: string; time: string | null; source: string | null };
+    const parts = it.date.split(/\s*(?:~|〜|–|—|부터)\s*/);
+    const dates = parts.map(toIsoDate);
+    if (parts.length === 2 && dates[0] && dates[1]) {
+      const base = (it.step ?? '일정').replace(/\s*(기간|시작|마감)$/, '');
+      out.push({ ...it, step: `${base} 시작`, date: dates[0], time: null });
+      out.push({ ...it, step: `${base} 마감`, date: dates[1] });
+    } else if (dates[0] && parts.length === 1) {
+      out.push({ ...it, date: dates[0] });
+    } else {
+      out.push(item);
+    }
+  }
+  return out;
+}
+
 app.post('/api/analyze', async (req, res) => {
   try {
     const { text, file, files, companyTypeHint } = req.body ?? {};
@@ -496,6 +528,7 @@ app.post('/api/analyze', async (req, res) => {
       return;
     }
 
+    parsed.schedule = normalizeSchedule(parsed.schedule);
     res.json(parsed);
   } catch (error) {
     console.error('Gemini analyze error:', error);

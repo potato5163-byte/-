@@ -15,7 +15,7 @@ interface MascotProps {
 const MASCOT_ASSETS: Record<MascotVariant, { src: string; defaultAlt: string }> = {
   hello: {
     src: '/assets/aistudio/gongjeongi_hello_ce1a439d.png',
-    defaultAlt: '공고정리 마스코트 공정이 기본 인사 모습',
+    defaultAlt: '공고쏙 마스코트 공정이 기본 인사 모습',
   },
   saved: {
     src: '/assets/aistudio/gongjeongi_saved_82131759.png',

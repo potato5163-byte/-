@@ -8,6 +8,7 @@ import type {
 } from '../types';
 import type { LanguageSpec, UserProfileMeta } from '../utils/specMatching';
 import { Mascot } from './Mascot';
+import { getRecruitUrl } from '../utils/recruitSites';
 
 interface RecommendViewProps {
   certificates: string[];
@@ -244,11 +245,8 @@ export const RecommendView: React.FC<RecommendViewProps> = ({
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-stretch">
             {result.recommendations.map((rec, idx) => {
+              const searchUrl = getRecruitUrl(rec.organization);
               const savedMatch = findSavedByOrg(rec.organization);
-              const searchQuery = encodeURIComponent(
-                `${rec.organization} ${rec.recommended_position} 채용공고`
-              );
-              const searchUrl = `https://www.google.com/search?q=${searchQuery}`;
 
               return (
                 <article
@@ -354,7 +352,7 @@ export const RecommendView: React.FC<RecommendViewProps> = ({
                         <span className="material-symbols-outlined text-[14px]">
                           open_in_new
                         </span>
-                        <span>공고 검색</span>
+                        <span>공고 보기</span>
                       </a>
                       <button
                         type="button"

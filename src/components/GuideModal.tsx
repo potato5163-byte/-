@@ -78,7 +78,7 @@ export const GuideModal: React.FC<GuideModalProps> = ({ isOpen, onClose }) => {
       <div
         role="dialog"
         aria-modal="true"
-        aria-label="공고정리 사용법 안내"
+        aria-label="공고쏙 사용법 안내"
         className="w-full max-w-[480px] sm:max-w-[460px] bg-surface-container-lowest rounded-t-3xl sm:rounded-3xl p-6 shadow-2xl border border-[#e6edf7] space-y-5 mascot-pop"
         onClick={(e) => e.stopPropagation()}
       >

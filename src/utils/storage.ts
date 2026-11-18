@@ -593,7 +593,7 @@ export function exportBackupFile(
   const a = document.createElement('a');
   const dateTag = new Date().toISOString().slice(0, 10);
   a.href = url;
-  a.download = `공고정리_백업_${dateTag}.json`;
+  a.download = `공고쏙_백업_${dateTag}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -745,7 +745,7 @@ export function exportAnnouncementsCsv(
   const a = document.createElement('a');
   const dateTag = new Date().toISOString().slice(0, 10);
   a.href = url;
-  a.download = `공고정리_지원현황_${dateTag}.csv`;
+  a.download = `공고쏙_지원현황_${dateTag}.csv`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);

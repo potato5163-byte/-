@@ -878,7 +878,7 @@ export default function App() {
       const raw = await file.text();
       const restored = parseBackupFileContent(raw);
       if (!restored) {
-        showTempBackupMessage('올바른 공고정리 백업 파일이 아닙니다');
+        showTempBackupMessage('올바른 공고쏙 백업 파일이 아닙니다');
         return;
       }
       if (savedAnnouncements.length === 0) {
@@ -1083,7 +1083,7 @@ export default function App() {
                   <Mascot variant="hello" size="xs" className="w-full h-full" />
                 </div>
                 <span className="font-headline-sm text-headline-sm text-primary tracking-tight whitespace-nowrap shrink-0">
-                  공고정리
+                  공고쏙
                 </span>
               </button>
 

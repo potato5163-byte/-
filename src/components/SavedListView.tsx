@@ -17,6 +17,7 @@ import {
 import { downloadAllSchedulesIcs } from '../utils/calendar';
 import { exportAnnouncementsCsv } from '../utils/storage';
 import { Mascot } from './Mascot';
+import { SpecSimulator } from './SpecSimulator';
 
 interface SavedListViewProps {
   items: SavedAnnouncement[];
@@ -60,7 +61,7 @@ function toSafeHttpUrl(raw?: string | null): string | null {
   }
 }
 
-type ListViewMode = 'list' | 'calendar';
+type ListViewMode = 'list' | 'calendar' | 'sim';
 type SortMode = 'deadline' | 'recent';
 type FilterMode =
   | 'all'
@@ -596,7 +597,7 @@ export const SavedListView: React.FC<SavedListViewProps> = ({
         </div>
 
         {/* 보기 모드 전환 (공고 목록 / 통합 일정) */}
-        <div className="grid grid-cols-2 gap-1 p-1 bg-surface-container rounded-xl border border-[#e2e9f5] lg:max-w-[360px]">
+        <div className="grid grid-cols-3 gap-1 p-1 bg-surface-container rounded-xl border border-[#e2e9f5] lg:max-w-[480px]">
           <button
             type="button"
             onClick={() => setViewMode('list')}
@@ -621,10 +622,30 @@ export const SavedListView: React.FC<SavedListViewProps> = ({
             <span className="material-symbols-outlined text-[17px]">calendar_month</span>
             <span>통합 일정</span>
           </button>
+          <button
+            type="button"
+            onClick={() => setViewMode('sim')}
+            className={`min-h-[40px] rounded-lg font-label-md text-label-md flex items-center justify-center gap-1.5 transition-all whitespace-nowrap ${
+              viewMode === 'sim'
+                ? 'bg-surface-container-lowest text-secondary shadow-xs'
+                : 'text-on-surface-variant hover:text-on-surface'
+            }`}
+          >
+            <span className="material-symbols-outlined text-[17px]">science</span>
+            <span>스펙 시뮬</span>
+          </button>
         </div>
       </div>
 
-      {viewMode === 'calendar' ? (
+      {viewMode === 'sim' ? (
+        <SpecSimulator
+          items={items}
+          certificates={certificates}
+          languageSpecs={languageSpecs}
+          skills={skills}
+          profileMeta={profileMeta}
+        />
+      ) : viewMode === 'calendar' ? (
         /* 통합 채용 일정 타임라인 */
         <div className="space-y-4">
           <div className="brand-card rounded-2xl px-4 py-3 flex flex-wrap items-center justify-between gap-2.5">

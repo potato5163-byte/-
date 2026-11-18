@@ -132,7 +132,7 @@ export function downloadScheduleIcs(analysis: JobAnalysis): boolean {
   );
   if (validSchedules.length === 0) return false;
 
-  const org = analysis.organization?.trim() || '공고정리';
+  const org = analysis.organization?.trim() || '공고쏙';
   const position = analysis.position?.trim() || '';
   const dtstamp = formatUtcStamp(new Date());
 
@@ -182,7 +182,7 @@ export function downloadAllSchedulesIcs(
   items.forEach((ann, annIdx) => {
     if (ann.applicationStatus === '보류' || ann.applicationStatus === '불합격') return;
     const scheds = Array.isArray(ann.analysis.schedule) ? ann.analysis.schedule : [];
-    const org = ann.analysis.organization?.trim() || '공고정리';
+    const org = ann.analysis.organization?.trim() || '공고쏙';
     const position = ann.analysis.position?.trim() || '';
 
     scheds.forEach((sched, schedIdx) => {
@@ -210,6 +210,6 @@ export function downloadAllSchedulesIcs(
 
   lines.push('END:VCALENDAR');
   const dateTag = new Date().toISOString().slice(0, 10);
-  triggerIcsDownload(lines, `공고정리_통합일정_${dateTag}.ics`);
+  triggerIcsDownload(lines, `공고쏙_통합일정_${dateTag}.ics`);
   return count;
 }

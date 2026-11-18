@@ -1,5 +1,5 @@
 {
-  "name": "공고정리",
+  "name": "공고쏙",
   "description": "긴 채용공고, 할 일만 남겨드려요 - 공기업·사기업 채용공고 AI 분석기",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
