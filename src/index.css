@@ -1,0 +1,245 @@
+@import "tailwindcss";
+
+@theme {
+  --color-tertiary-fixed-dim: #34d399;
+  --color-secondary: #1e64e8;
+  --color-on-tertiary-fixed-variant: #047857;
+  --color-on-secondary-fixed-variant: #154bb8;
+  --color-surface-container-low: #f0f4fa;
+  --color-tertiary-container: #064e3b;
+  --color-tertiary-fixed: #d1fae5;
+  --color-on-tertiary: #ffffff;
+  --color-surface-container-highest: #dce4f0;
+  --color-surface: #f4f7fc;
+  --color-secondary-fixed-dim: #bfdbfe;
+  --color-inverse-surface: #1e293b;
+  --color-secondary-container: #2f7df6;
+  --color-on-primary-fixed-variant: #334155;
+  --color-surface-container: #e8eef7;
+  --color-background: #f4f7fc;
+  --color-secondary-fixed: #e6f0ff;
+  --color-on-error: #ffffff;
+  --color-error: #dc2626;
+  --color-on-background: #16213e;
+  --color-primary-fixed-dim: #cbd5e1;
+  --color-on-primary-container: #94a3b8;
+  --color-on-surface: #16213e;
+  --color-primary-container: #16213e;
+  --color-on-surface-variant: #475569;
+  --color-on-secondary-fixed: #0f3a8a;
+  --color-inverse-primary: #cbd5e1;
+  --color-outline-variant: #cbd5e1;
+  --color-primary: #16213e;
+  --color-surface-variant: #e2e8f0;
+  --color-on-error-container: #991b1b;
+  --color-surface-dim: #dde4ef;
+  --color-error-container: #fee2e2;
+  --color-tertiary: #065f46;
+  --color-surface-container-high: #e4ebf5;
+  --color-surface-bright: #f8fafd;
+  --color-inverse-on-surface: #f1f5f9;
+  --color-outline: #64748b;
+  --color-on-tertiary-container: #6ee7b7;
+  --color-primary-fixed: #e2e8f0;
+  --color-on-primary: #ffffff;
+  --color-surface-tint: #1e64e8;
+  --color-on-secondary: #ffffff;
+  --color-on-primary-fixed: #16213e;
+  --color-surface-container-lowest: #ffffff;
+  --color-on-secondary-container: #ffffff;
+  --color-on-tertiary-fixed: #065f46;
+  --color-bell-soft: #fffbeb;
+  --color-bell-border: #fde68a;
+  --color-bell-ink: #92400e;
+
+  --spacing-margin: 1rem;
+  --spacing-space-sm: 0.5rem;
+  --spacing-gutter: 1rem;
+  --spacing-space-md: 1rem;
+  --spacing-space-xl: 2rem;
+  --spacing-space-xs: 0.25rem;
+  --spacing-space-lg: 1.5rem;
+
+  --font-body-md: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-headline-lg: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-body-sm: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-headline-md: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-headline-xl: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-body-lg: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-label-md: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-headline-sm: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+  --font-label-sm: "Plus Jakarta Sans", "Noto Sans KR", -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", sans-serif;
+}
+
+@layer base {
+  html,
+  body {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f7fc;
+    color: #16213e;
+  }
+  body {
+    min-height: max(884px, 100dvh);
+    overscroll-behavior-y: none;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.pt-safe {
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.brand-card {
+  background-color: #ffffff;
+  border: 1px solid #e6edf7;
+  box-shadow: 0 2px 12px rgba(22, 33, 62, 0.04);
+}
+
+/* Custom typography scale matching design tokens */
+.text-body-md {
+  font-size: 14px;
+  line-height: 22px;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+.text-headline-lg {
+  font-size: 23px;
+  line-height: 31px;
+  letter-spacing: -0.02em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.text-body-sm {
+  font-size: 13px;
+  line-height: 19px;
+  letter-spacing: -0.005em;
+  font-weight: 400;
+}
+.text-headline-md {
+  font-size: 19px;
+  line-height: 27px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+.text-headline-xl {
+  font-size: 28px;
+  line-height: 36px;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  text-wrap: balance;
+}
+.text-body-lg {
+  font-size: 16px;
+  line-height: 24px;
+  letter-spacing: -0.01em;
+  font-weight: 600;
+}
+.text-label-md {
+  font-size: 13px;
+  line-height: 18px;
+  letter-spacing: 0em;
+  font-weight: 600;
+}
+.text-headline-sm {
+  font-size: 17px;
+  line-height: 24px;
+  letter-spacing: -0.015em;
+  font-weight: 700;
+}
+.text-label-sm {
+  font-size: 11.5px;
+  line-height: 15px;
+  letter-spacing: 0.005em;
+  font-weight: 600;
+}
+
+@keyframes mascot-float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+@keyframes mascot-analyzing {
+  0%,
+  100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-5px) rotate(-1.5deg);
+  }
+}
+
+@keyframes mascot-pop {
+  0% {
+    opacity: 0;
+    transform: scale(0.9) translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0px);
+  }
+}
+
+.mascot-float {
+  animation: mascot-float 3.4s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mascot-analyzing {
+  animation: mascot-analyzing 1.6s ease-in-out infinite;
+  will-change: transform;
+}
+
+.mascot-pop {
+  animation: mascot-pop 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mascot-float,
+  .mascot-analyzing,
+  .mascot-pop,
+  .animate-pulse {
+    animation: none !important;
+    transform: none !important;
+  }
+}
+
+@media print {
+  html,
+  body {
+    background: #ffffff !important;
+    color: #16213e !important;
+  }
+  header,
+  nav,
+  .no-print {
+    display: none !important;
+  }
+  main {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    max-width: 100% !important;
+  }
+  .brand-card {
+    box-shadow: none !important;
+    border-color: #cbd5e1 !important;
+    break-inside: avoid;
+  }
+}

@@ -1,0 +1,920 @@
+<!-- 공고 분석 결과 -->
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_stack" name="shell-type"/><title>공고정리</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f7f9fb;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'tertiary-fixed-dim': '#62df7d', 'secondary': '#0051d5', 'on-tertiary-fixed-variant': '#005320', 'on-secondary-fixed-variant': '#003ea8', 'surface-container-low': '#f2f4f6', 'tertiary-container': '#002109', 'tertiary-fixed': '#7ffc97', 'on-tertiary': '#ffffff', 'surface-container-highest': '#e0e3e5', 'surface': '#f7f9fb', 'secondary-fixed-dim': '#b4c5ff', 'inverse-surface': '#2d3133', 'secondary-container': '#316bf3', 'on-primary-fixed-variant': '#3f465c', 'surface-container': '#eceef0', 'background': '#f7f9fb', 'secondary-fixed': '#dbe1ff', 'on-error': '#ffffff', 'error': '#ba1a1a', 'on-background': '#191c1e', 'primary-fixed-dim': '#bec6e0', 'on-primary-container': '#7c839b', 'on-surface': '#191c1e', 'primary-container': '#131b2e', 'on-surface-variant': '#45464d', 'on-secondary-fixed': '#00174b', 'inverse-primary': '#bec6e0', 'outline-variant': '#c6c6cd', 'primary': '#000000', 'surface-variant': '#e0e3e5', 'on-error-container': '#93000a', 'surface-dim': '#d8dadc', 'error-container': '#ffdad6', 'tertiary': '#000000', 'surface-container-high': '#e6e8ea', 'surface-bright': '#f7f9fb', 'inverse-on-surface': '#eff1f3', 'outline': '#76777d', 'on-tertiary-container': '#009842', 'primary-fixed': '#dae2fd', 'on-primary': '#ffffff', 'surface-tint': '#565e74', 'on-secondary': '#ffffff', 'on-primary-fixed': '#131b2e', 'surface-container-lowest': '#ffffff', 'on-secondary-container': '#fefcff', 'on-tertiary-fixed': '#002109' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin': '1rem', 'space-sm': '0.5rem', 'gutter': '1rem', 'space-md': '1rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'space-lg': '1.5rem' }, fontFamily: { 'body-md': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'headline-xl': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'label-md': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'] }, fontSize: { 'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0em', fontWeight: '400' }], 'headline-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-sm': ['13px', { lineHeight: '18px', letterSpacing: '0em', fontWeight: '400' }], 'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '600' }], 'headline-xl': ['30px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '500' }], 'label-md': ['13px', { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '600' }], 'headline-sm': ['18px', { lineHeight: '26px', letterSpacing: '-0.01em', fontWeight: '600' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '700' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[440px] mx-auto h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-xs"><button aria-label="뒤로가기" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface hover:bg-surface-container-high transition-colors" onclick="history.back()"><span class="material-symbols-outlined text-[22px]">arrow_back_ios_new</span></button><h1 class="font-headline-sm text-headline-sm text-on-surface tracking-tight">공고 분석 결과</h1></div><div class="flex items-center gap-space-xs"><button aria-label="공유 또는 저장" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">bookmark_add</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full max-w-[440px] mx-auto px-gutter pt-16 pb-safe bg-surface flex flex-col"><div class="flex flex-col w-full pb-24 space-y-4">
+<!-- 기관 및 마감 요약 카드 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-start justify-between gap-space-xs mb-3">
+<div class="min-w-0">
+<span class="inline-block px-2 py-0.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm mb-1.5">
+          공공기관 • 전력그룹
+        </span>
+<h2 class="font-headline-lg text-headline-lg text-on-surface tracking-tight truncate">
+          한국전력거래소
+        </h2>
+<p class="font-body-lg text-body-lg text-secondary font-semibold mt-0.5">
+          전기 직렬 (일반 정규직)
+        </p>
+</div>
+<div class="shrink-0 flex flex-col items-end">
+<span class="inline-flex items-center gap-1 px-3 py-1.5 rounded-xl bg-error text-on-error font-headline-sm text-headline-sm shadow-sm animate-pulse">
+<span class="material-symbols-outlined text-[18px]">timer</span>
+          서류 마감 D-7
+        </span>
+</div>
+</div>
+<!-- 접수 일정 메타 바 -->
+<div class="bg-surface-container-low rounded-lg p-2.5 flex items-center gap-2 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[18px] text-secondary">calendar_clock</span>
+<span class="font-medium text-on-surface">접수 기간</span>
+<span class="text-on-surface-variant truncate">2026.11.24(화) ~ 12.01(화) 18:00</span>
+</div>
+</div>
+<!-- 조건 판정 뱃지 띠 (가로 스크롤 스냅) -->
+<div class="flex items-center gap-2 overflow-x-auto no-scrollbar py-1 -mx-gutter px-gutter">
+<div class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-tertiary-fixed text-on-tertiary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span class="font-label-md text-label-md">지원 가능</span>
+</div>
+<div class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-secondary-fixed text-on-secondary-fixed shadow-sm">
+<span class="material-symbols-outlined text-[16px]" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-md text-label-md">가산점 +5점 확정</span>
+</div>
+<div class="shrink-0 inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-error-container text-on-error-container shadow-sm">
+<span class="material-symbols-outlined text-[16px]">priority_high</span>
+<span class="font-label-md text-label-md">어학 점수 유효기간 확인 요망</span>
+</div>
+</div>
+<!-- 카드 1: 주요 일정 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm">
+<div class="flex items-center justify-between pb-3 border-b-0">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">event_note</span>
+</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">주요 전형 일정</h3>
+</div>
+<span class="font-label-sm text-label-sm text-secondary bg-secondary-fixed/50 px-2 py-0.5 rounded-full">
+        총 4개 전형
+      </span>
+</div>
+<div class="relative pl-6 mt-3 space-y-4">
+<!-- 타임라인 버티컬 라인 -->
+<div class="absolute left-2.5 top-2 bottom-2 w-0.5 bg-surface-container-highest"></div>
+<!-- 일정 1 -->
+<div class="relative flex items-start justify-between">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-error ring-4 ring-error-container"></div>
+<div>
+<div class="flex items-center gap-1.5">
+<span class="font-body-md text-body-md text-on-surface font-semibold">서류 접수 마감</span>
+<span class="px-1.5 py-0.2 rounded bg-error-container text-on-error-container font-label-sm text-label-sm">D-7</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2026.12.01(화) 18:00 전산 마감</p>
+</div>
+</div>
+<!-- 일정 2 -->
+<div class="relative flex items-start justify-between">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">필기시험 (NCS · 전공)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2026.12.19(토) 서울/나주 고사장</p>
+</div>
+</div>
+<!-- 일정 3 -->
+<div class="relative flex items-start justify-between">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">1차 면접 (직무 PT · 인성)</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2027.01.07(목)</p>
+</div>
+</div>
+<!-- 일정 4 -->
+<div class="relative flex items-start justify-between">
+<div class="absolute -left-6 top-1 w-2.5 h-2.5 rounded-full bg-outline-variant"></div>
+<div>
+<span class="font-body-md text-body-md text-on-surface font-semibold">최종 합격자 발표</span>
+<p class="font-body-sm text-body-sm text-on-surface-variant">2027.01.20(수) 14:00 예정</p>
+</div>
+</div>
+</div>
+</div>
+<!-- 카드 2: 지원 자격 및 가산점 분석 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">fact_check</span>
+</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">지원 자격 및 가산점</h3>
+</div>
+<!-- 항목 1: 어학 기준 -->
+<div class="bg-surface-container-low rounded-xl p-3 space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[18px]">language</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">어학 필수 요건</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-surface-container-highest text-on-surface font-label-sm text-label-sm">필수 통과</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+        토익 700점 이상 또는 토익스피킹 IM2 이상
+      </p>
+<div class="p-2 bg-surface-container rounded text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-secondary">공고 원문:</span> "접수 마감일 기준 유효한 국내 정기시험 공인어학성적(TOEIC 700점 이상 등) 보유자"
+      </div>
+</div>
+<!-- 항목 2: 기술자격 가산점 -->
+<div class="bg-surface-container-low rounded-xl p-3 space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary-container text-[18px]">verified</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">기술자격 가산점</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">+5점 인정</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+        전기기사 취득자 (보유 확인)
+      </p>
+<div class="p-2 bg-surface-container rounded text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-secondary">공고 원문:</span> "[별표 1] 지원 직무 관련 국가기술자격증(기사 이상) 보유 시 서류전형 5점 가산"
+      </div>
+</div>
+<!-- 항목 3: 한국사 가산점 -->
+<div class="bg-surface-container-low rounded-xl p-3 space-y-1.5">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-outline text-[18px]">history_edu</span>
+<span class="font-body-md text-body-md text-on-surface font-semibold">한국사능력검정시험</span>
+</div>
+<span class="px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm font-bold">+2점 부여</span>
+</div>
+<p class="font-body-md text-body-md text-on-surface">
+        한국사 2급 이상 보유자 대상
+      </p>
+<div class="p-2 bg-surface-container rounded text-on-surface-variant font-body-sm text-body-sm">
+<span class="font-medium text-secondary">공고 원문:</span> "한국사능력검정시험 2급 이상 보유자 서류전형 2점 가산 부여"
+      </div>
+</div>
+</div>
+<!-- 카드 3: 제출 서류 인터랙티브 체크리스트 -->
+<div class="bg-surface-container-lowest rounded-xl p-space-md shadow-sm space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-surface-container flex items-center justify-center text-on-surface">
+<span class="material-symbols-outlined text-[18px]">checklist</span>
+</span>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">제출 서류 체크리스트</h3>
+</div>
+<span class="font-label-sm text-label-sm text-on-surface-variant bg-surface-container-high px-2 py-0.5 rounded-full" id="checklist-counter">
+        2 / 4 완료
+      </span>
+</div>
+<div class="space-y-2" id="checklist-items">
+<!-- 아이템 1 (완료) -->
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low active:bg-surface-container cursor-pointer select-none">
+<input checked="" class="mt-0.5 w-5 h-5 rounded accent-secondary-container cursor-pointer" onchange="toggleCheck(this)" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium line-through opacity-70 item-title">
+            졸업(예정)증명서 원본
+          </p>
+<span class="font-body-sm text-body-sm text-secondary font-medium item-desc">정부24 전자문서 발급 완료</span>
+</div>
+</label>
+<!-- 아이템 2 (완료) -->
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low active:bg-surface-container cursor-pointer select-none">
+<input checked="" class="mt-0.5 w-5 h-5 rounded accent-secondary-container cursor-pointer" onchange="toggleCheck(this)" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium line-through opacity-70 item-title">
+            전기기사 자격증 사본
+          </p>
+<span class="font-body-sm text-body-sm text-secondary font-medium item-desc">Q-Net 확인서 PDF 저장 완료</span>
+</div>
+</label>
+<!-- 아이템 3 (미완료) -->
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low active:bg-surface-container cursor-pointer select-none">
+<input class="mt-0.5 w-5 h-5 rounded accent-secondary-container cursor-pointer" onchange="toggleCheck(this)" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium item-title">
+            공인어학성적표 사본
+          </p>
+<span class="font-body-sm text-body-sm text-error font-medium item-desc">토익 유효기간 확인 및 스캔 대기</span>
+</div>
+</label>
+<!-- 아이템 4 (미완료) -->
+<label class="flex items-start gap-3 p-2.5 rounded-lg bg-surface-container-low active:bg-surface-container cursor-pointer select-none">
+<input class="mt-0.5 w-5 h-5 rounded accent-secondary-container cursor-pointer" onchange="toggleCheck(this)" type="checkbox"/>
+<div class="min-w-0 flex-1">
+<p class="font-body-md text-body-md text-on-surface font-medium item-title">
+            입사지원서 및 직무수행계획서
+          </p>
+<span class="font-body-sm text-body-sm text-on-surface-variant item-desc">문항별 글자수 검토 필요</span>
+</div>
+</label>
+</div>
+</div>
+<!-- 아코디언 패널: 내 스펙 확인 / 수정 -->
+<div class="bg-surface-container-lowest rounded-xl shadow-sm overflow-hidden">
+<button class="w-full p-space-md flex items-center justify-between text-left active:bg-surface-container-low transition-colors" onclick="toggleAccordion()">
+<div class="flex items-center gap-2">
+<span class="w-7 h-7 rounded-lg bg-secondary-fixed text-on-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-[18px]">badge</span>
+</span>
+<div>
+<h3 class="font-headline-sm text-headline-sm text-on-surface">내 스펙 프로필 매칭</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">자격증 및 어학 점수 즉시 반영</p>
+</div>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant transition-transform duration-200" id="accordion-icon">
+        expand_more
+      </span>
+</button>
+<div class="hidden p-space-md pt-0 space-y-4" id="accordion-content">
+<!-- 보유 자격증 태그 묶음 -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-2">등록된 자격증</label>
+<div class="flex flex-wrap gap-2">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-secondary-fixed text-on-secondary-fixed font-label-md text-label-md">
+            전기기사
+            <span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container-high text-on-surface font-label-md text-label-md">
+            컴퓨터활용능력 2급
+            <span class="material-symbols-outlined text-[14px]">check</span>
+</span>
+<button class="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg bg-surface-container text-secondary font-label-md text-label-md active:bg-surface-container-highest">
+<span class="material-symbols-outlined text-[14px]">add</span>
+            자격증 추가
+          </button>
+</div>
+</div>
+<!-- 내 어학 점수 인풋 -->
+<div>
+<label class="block font-label-md text-label-md text-on-surface mb-1.5" for="toeic-score">내 공인 어학 성적</label>
+<div class="flex gap-2">
+<div class="relative flex-1">
+<span class="absolute left-3 top-1/2 -translate-y-1/2 font-label-md text-label-md text-on-surface-variant">TOEIC</span>
+<input class="w-full pl-16 pr-3 py-2.5 bg-surface-container-low rounded-lg text-on-surface font-headline-sm text-headline-sm focus:bg-surface-container-lowest focus:outline-none focus:ring-2 focus:ring-secondary/20" id="toeic-score" type="number" value="785"/>
+</div>
+<button class="px-4 py-2.5 rounded-lg bg-primary text-on-primary font-label-md text-label-md active:opacity-90" onclick="saveScoreFeedback()">
+            적용
+          </button>
+</div>
+<p class="mt-2 font-body-sm text-body-sm text-secondary flex items-center gap-1" id="feedback-msg">
+<span class="material-symbols-outlined text-[16px]">info</span>
+          내 스펙 정보를 바탕으로 지원 조건과 가산점이 자동 계산됩니다.
+        </p>
+</div>
+</div>
+</div>
+<!-- 하단 플로팅 액션 독 -->
+<div class="fixed bottom-0 inset-x-0 z-40 bg-surface/90 backdrop-blur-md pt-2 pb-safe shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<div class="max-w-[440px] mx-auto px-gutter pb-3 flex items-center gap-2">
+<button aria-label="원문 보기" class="h-12 w-12 rounded-xl bg-surface-container flex items-center justify-center text-on-surface active:bg-surface-container-high shrink-0" onclick="toggleShareToast()">
+<span class="material-symbols-outlined text-[20px]">open_in_new</span>
+</button>
+<button class="flex-1 h-12 rounded-xl bg-primary text-on-primary font-label-md text-label-md flex items-center justify-center gap-2 shadow-sm active:bg-on-surface-variant transition-colors" id="save-btn" onclick="toggleSaveAnnouncement()">
+<span class="material-symbols-outlined text-[20px]" id="save-icon">bookmark</span>
+<span id="save-text">내 공고에 저장하기</span>
+</button>
+</div>
+</div>
+</div>
+<script>
+  function toggleCheck(checkbox) {
+    const parent = checkbox.closest('label');
+    const title = parent.querySelector('.item-title');
+    if (checkbox.checked) {
+      title.classList.add('line-through', 'opacity-70');
+    } else {
+      title.classList.remove('line-through', 'opacity-70');
+    }
+    updateCounter();
+  }
+
+  function updateCounter() {
+    const total = document.querySelectorAll('#checklist-items input[type="checkbox"]').length;
+    const checked = document.querySelectorAll('#checklist-items input[type="checkbox"]:checked').length;
+    const counter = document.getElementById('checklist-counter');
+    if (counter) {
+      counter.textContent = `${checked} / ${total} 완료`;
+    }
+  }
+
+  function toggleAccordion() {
+    const content = document.getElementById('accordion-content');
+    const icon = document.getElementById('accordion-icon');
+    if (content.classList.contains('hidden')) {
+      content.classList.remove('hidden');
+      icon.style.transform = 'rotate(180deg)';
+    } else {
+      content.classList.add('hidden');
+      icon.style.transform = 'rotate(0deg)';
+    }
+  }
+
+  function saveScoreFeedback() {
+    const input = document.getElementById('toeic-score');
+    const msg = document.getElementById('feedback-msg');
+    if (input && msg) {
+      msg.innerHTML = '<span class="material-symbols-outlined text-[16px]">check_circle</span> 점수가 반영되었습니다 (토익 ' + input.value + '점)';
+      msg.classList.remove('text-secondary');
+      msg.classList.add('text-on-tertiary-fixed-variant');
+      setTimeout(() => {
+        msg.classList.remove('text-on-tertiary-fixed-variant');
+        msg.classList.add('text-secondary');
+        msg.innerHTML = '<span class="material-symbols-outlined text-[16px]">info</span> 내 스펙 정보를 바탕으로 지원 조건과 가산점이 자동 계산됩니다.';
+      }, 2500);
+    }
+  }
+
+  let isSaved = false;
+  function toggleSaveAnnouncement() {
+    isSaved = !isSaved;
+    const btn = document.getElementById('save-btn');
+    const icon = document.getElementById('save-icon');
+    const text = document.getElementById('save-text');
+    if (isSaved) {
+      btn.classList.remove('bg-primary', 'text-on-primary');
+      btn.classList.add('bg-secondary-container', 'text-on-secondary-container');
+      icon.setAttribute('style', "font-variation-settings: 'FILL' 1;");
+      text.textContent = '내 공고함에 저장됨';
+    } else {
+      btn.classList.remove('bg-secondary-container', 'text-on-secondary-container');
+      btn.classList.add('bg-primary', 'text-on-primary');
+      icon.removeAttribute('style');
+      text.textContent = '내 공고에 저장하기';
+    }
+  }
+
+  function toggleShareToast() {
+    window.open('https://kpx.or.kr', '_blank');
+  }
+</script></main></body></html>
+
+<!-- 내 공고 목록 -->
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>공고정리</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f7f9fb;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'tertiary-fixed-dim': '#62df7d', 'secondary': '#0051d5', 'on-tertiary-fixed-variant': '#005320', 'on-secondary-fixed-variant': '#003ea8', 'surface-container-low': '#f2f4f6', 'tertiary-container': '#002109', 'tertiary-fixed': '#7ffc97', 'on-tertiary': '#ffffff', 'surface-container-highest': '#e0e3e5', 'surface': '#f7f9fb', 'secondary-fixed-dim': '#b4c5ff', 'inverse-surface': '#2d3133', 'secondary-container': '#316bf3', 'on-primary-fixed-variant': '#3f465c', 'surface-container': '#eceef0', 'background': '#f7f9fb', 'secondary-fixed': '#dbe1ff', 'on-error': '#ffffff', 'error': '#ba1a1a', 'on-background': '#191c1e', 'primary-fixed-dim': '#bec6e0', 'on-primary-container': '#7c839b', 'on-surface': '#191c1e', 'primary-container': '#131b2e', 'on-surface-variant': '#45464d', 'on-secondary-fixed': '#00174b', 'inverse-primary': '#bec6e0', 'outline-variant': '#c6c6cd', 'primary': '#000000', 'surface-variant': '#e0e3e5', 'on-error-container': '#93000a', 'surface-dim': '#d8dadc', 'error-container': '#ffdad6', 'tertiary': '#000000', 'surface-container-high': '#e6e8ea', 'surface-bright': '#f7f9fb', 'inverse-on-surface': '#eff1f3', 'outline': '#76777d', 'on-tertiary-container': '#009842', 'primary-fixed': '#dae2fd', 'on-primary': '#ffffff', 'surface-tint': '#565e74', 'on-secondary': '#ffffff', 'on-primary-fixed': '#131b2e', 'surface-container-lowest': '#ffffff', 'on-secondary-container': '#fefcff', 'on-tertiary-fixed': '#002109' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin': '1rem', 'space-sm': '0.5rem', 'gutter': '1rem', 'space-md': '1rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'space-lg': '1.5rem' }, fontFamily: { 'body-md': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'headline-xl': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'label-md': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'] }, fontSize: { 'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0em', fontWeight: '400' }], 'headline-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-sm': ['13px', { lineHeight: '18px', letterSpacing: '0em', fontWeight: '400' }], 'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '600' }], 'headline-xl': ['30px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '500' }], 'label-md': ['13px', { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '600' }], 'headline-sm': ['18px', { lineHeight: '26px', letterSpacing: '-0.01em', fontWeight: '600' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '700' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[440px] mx-auto h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">checklist_rtl</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">공고정리</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">내 공고 목록</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="알림" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full max-w-[440px] mx-auto px-gutter pt-16 pb-24 bg-surface flex flex-col"><div class="flex flex-col w-full pb-10">
+<!-- Top Headline & Action Cluster -->
+<div class="flex flex-col gap-space-xs mb-space-md">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-space-sm">
+<h1 class="font-headline-lg text-headline-lg text-on-surface font-bold tracking-tight">내 공고</h1>
+<span class="inline-flex items-center px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+          총 3건
+        </span>
+</div>
+<button class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm shadow-sm active:scale-95 transition-all" type="button">
+<span class="material-symbols-outlined text-[16px] text-secondary">hourglass_top</span>
+<span>마감 임박 순</span>
+<span class="material-symbols-outlined text-[14px]">expand_more</span>
+</button>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant">
+      비교할 공고를 체크하여 일정과 전형 조건을 한눈에 대조해보세요.
+    </p>
+</div>
+<!-- Announcement Card List (3 Items) -->
+<div class="flex flex-col gap-space-md">
+<!-- Card 1: Selected (한국전력거래소) -->
+<div class="group relative flex flex-col rounded-2xl p-4 bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start gap-3">
+<!-- Custom Checkbox -->
+<label class="mt-1 flex items-center justify-center cursor-pointer select-none">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="w-6 h-6 rounded-lg bg-secondary flex items-center justify-center text-on-secondary peer-checked:bg-secondary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+<!-- Main Content -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2 mb-1">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-error-container text-on-error-container font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] mr-1">alarm</span>D-7 마감임박
+              </span>
+<span class="font-label-sm text-label-sm text-secondary">공기업 · 정규직</span>
+</div>
+<!-- Delete Button -->
+<button aria-label="삭제" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-error hover:bg-error-container/40 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate leading-snug">한국전력거래소</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 truncate">전기 직렬 (일반정규직)</p>
+<!-- Schedule & Merit Badges -->
+<div class="flex flex-col gap-2 mb-3 bg-surface-container-low p-2.5 rounded-xl">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">event_available</span>접수 마감
+              </span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">12.01(화) 18:00</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">verified</span>내 가산점
+              </span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-medium">+5점 적용 중 (전기기사)</span>
+</div>
+</div>
+<!-- Document Progress -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">task_alt</span>서류 준비 2/3 완료
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">66%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full rounded-full bg-secondary-container transition-all duration-500" style="width: 66%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 2: Selected (한국수력원자력) -->
+<div class="group relative flex flex-col rounded-2xl p-4 bg-surface-container-lowest shadow-sm transition-all hover:shadow-md">
+<div class="flex items-start gap-3">
+<!-- Custom Checkbox -->
+<label class="mt-1 flex items-center justify-center cursor-pointer select-none">
+<input checked="" class="peer sr-only" type="checkbox"/>
+<div class="w-6 h-6 rounded-lg bg-secondary flex items-center justify-center text-on-secondary peer-checked:bg-secondary transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]" style="font-variation-settings: 'FILL' 1;">check</span>
+</div>
+</label>
+<!-- Main Content -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2 mb-1">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-secondary-fixed text-on-secondary-fixed font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] mr-1">schedule</span>D-12
+              </span>
+<span class="font-label-sm text-label-sm text-secondary">공기업 · 대졸신입</span>
+</div>
+<!-- Delete Button -->
+<button aria-label="삭제" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-error hover:bg-error-container/40 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate leading-snug">한국수력원자력</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 truncate">원자력/전기</p>
+<!-- Schedule & Merit Badges -->
+<div class="flex flex-col gap-2 mb-3 bg-surface-container-low p-2.5 rounded-xl">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-secondary">event_available</span>접수 마감
+              </span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">12.06(일) 15:00</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">verified</span>내 가산점
+              </span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-tertiary-container text-on-tertiary-container font-medium">+7점 적용 중 (전기기사, 한국사)</span>
+</div>
+</div>
+<!-- Document Progress -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-secondary">pending</span>서류 준비 1/3 완료
+              </span>
+<span class="font-label-sm text-label-sm text-secondary font-bold">33%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full rounded-full bg-secondary transition-all duration-500" style="width: 33%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Card 3: Unchecked (한국도로공사) -->
+<div class="group relative flex flex-col rounded-2xl p-4 bg-surface-container-lowest/80 opacity-90 shadow-sm transition-all hover:opacity-100 hover:shadow-md">
+<div class="flex items-start gap-3">
+<!-- Custom Checkbox -->
+<label class="mt-1 flex items-center justify-center cursor-pointer select-none">
+<input class="peer sr-only" type="checkbox"/>
+<div class="w-6 h-6 rounded-lg bg-surface-container-high flex items-center justify-center text-transparent peer-checked:bg-secondary peer-checked:text-on-secondary transition-colors">
+<span class="material-symbols-outlined text-[18px]">check</span>
+</div>
+</label>
+<!-- Main Content -->
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between gap-2 mb-1">
+<div class="flex items-center gap-1.5 flex-wrap">
+<span class="inline-flex items-center px-2 py-0.5 rounded-md bg-surface-container-high text-on-surface-variant font-label-sm text-label-sm">
+<span class="material-symbols-outlined text-[12px] mr-1">event</span>D-18
+              </span>
+<span class="font-label-sm text-label-sm text-outline">준정부기관 · 인턴연계</span>
+</div>
+<!-- Delete Button -->
+<button aria-label="삭제" class="w-8 h-8 rounded-full flex items-center justify-center text-outline hover:text-error hover:bg-error-container/40 transition-colors" type="button">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<h2 class="font-headline-sm text-headline-sm text-on-surface font-semibold truncate leading-snug">한국도로공사</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant mb-3 truncate">전기직 (신입)</p>
+<!-- Schedule & Merit Badges -->
+<div class="flex flex-col gap-2 mb-3 bg-surface-container-low p-2.5 rounded-xl">
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">event_available</span>접수 마감
+              </span>
+<span class="font-label-md text-label-md text-on-surface font-semibold">12.12(토) 18:00</span>
+</div>
+<div class="flex items-center justify-between font-body-sm text-body-sm">
+<span class="text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-outline">verified</span>내 가산점
+              </span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded bg-surface-container-high text-on-surface-variant font-medium">+3점 (전기기사)</span>
+</div>
+</div>
+<!-- Document Progress -->
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center justify-between">
+<span class="font-label-sm text-label-sm text-on-surface-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px] text-outline">radio_button_unchecked</span>서류 준비 0/4 완료
+              </span>
+<span class="font-label-sm text-label-sm text-outline font-bold">0%</span>
+</div>
+<div class="w-full h-2 rounded-full bg-surface-container-highest overflow-hidden">
+<div class="h-full rounded-full bg-outline-variant transition-all duration-500" style="width: 0%;"></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<!-- Comparison Action Bar & Expanded Comparison Table Section -->
+<section class="mt-space-lg flex flex-col gap-space-md">
+<!-- Floating-style Prominent Action Banner -->
+<div class="flex items-center justify-between p-3.5 rounded-2xl bg-primary-container text-on-primary shadow-md">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-secondary flex items-center justify-center shadow-sm">
+<span class="material-symbols-outlined text-[20px] text-on-secondary">compare_arrows</span>
+</div>
+<div class="flex flex-col">
+<span class="font-headline-sm text-headline-sm text-on-primary font-semibold leading-tight">선택한 공고 2개 비교하기</span>
+<span class="font-label-sm text-label-sm text-on-primary-container">핵심 자격조건 및 전형 일정 대조 중</span>
+</div>
+</div>
+<button class="px-3.5 py-1.5 rounded-xl bg-secondary hover:bg-secondary-container text-on-secondary font-label-md text-label-md transition-transform active:scale-95 shadow-sm" type="button">
+        접기
+      </button>
+</div>
+<!-- Structured Institutional Comparison Card -->
+<div class="flex flex-col rounded-2xl bg-surface-container-lowest p-4 shadow-sm overflow-hidden">
+<div class="flex items-center justify-between pb-3 mb-3 bg-surface-container-low -mx-4 -mt-4 p-4">
+<span class="font-headline-sm text-headline-sm text-on-surface font-semibold flex items-center gap-1.5">
+<span class="material-symbols-outlined text-secondary text-[20px]">dataset</span>전형 상세 스펙 비교
+        </span>
+<span class="font-label-sm text-label-sm px-2 py-0.5 rounded-full bg-secondary-fixed text-on-secondary-fixed">
+          실시간 연동
+        </span>
+</div>
+<!-- Comparison Headers (2 Columns) -->
+<div class="grid grid-cols-2 gap-2 mb-3">
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">비교 A</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight truncate">한국전력거래소</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">전기 직렬</span>
+</div>
+<div class="p-3 rounded-xl bg-surface-container-low flex flex-col gap-1">
+<span class="font-label-sm text-label-sm text-secondary font-bold">비교 B</span>
+<span class="font-headline-sm text-headline-sm text-on-surface font-bold leading-tight truncate">한국수력원자력</span>
+<span class="font-label-sm text-label-sm text-on-surface-variant truncate">원자력/전기</span>
+</div>
+</div>
+<!-- Row-by-Row Field Breakdown -->
+<div class="flex flex-col gap-2.5">
+<!-- Row 1: 마감일시 -->
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low/70">
+<span class="font-label-sm text-label-sm text-outline mb-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">timer</span>마감 일시
+          </span>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-error font-bold">12.01(화) 18:00</span>
+<span class="font-label-sm text-label-sm text-error/80">D-7 (마감임박)</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-semibold">12.06(일) 15:00</span>
+<span class="font-label-sm text-label-sm text-secondary">D-12 남음</span>
+</div>
+</div>
+</div>
+<!-- Row 2: 내 가산점 -->
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low/70">
+<span class="font-label-sm text-label-sm text-outline mb-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">military_tech</span>내 가산점 적용
+          </span>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-on-surface font-bold">+5점</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">전기기사</span>
+</div>
+<div class="flex flex-col">
+<span class="font-label-md text-label-md text-secondary font-bold">+7점</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">전기기사 + 한국사</span>
+</div>
+</div>
+</div>
+<!-- Row 3: 어학 조건 -->
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low/70">
+<span class="font-label-sm text-label-sm text-outline mb-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">translate</span>어학 자격 요건
+          </span>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">토익 700점 이상</span>
+</div>
+<div class="flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed-dim">check_circle</span>
+<span class="font-body-sm text-body-sm text-on-surface">토익 750점 이상</span>
+</div>
+</div>
+</div>
+<!-- Row 4: 전형 단계 -->
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low/70">
+<span class="font-label-sm text-label-sm text-outline mb-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">account_tree</span>전형 절차
+          </span>
+<div class="grid grid-cols-2 gap-2">
+<p class="font-body-sm text-body-sm text-on-surface leading-tight">
+              서류 → 필기(전공/NCS) → 면접(1회)
+            </p>
+<p class="font-body-sm text-body-sm text-on-surface leading-tight">
+              서류 → 필기(NCS/상식) → 1차/2차 면접
+            </p>
+</div>
+</div>
+<!-- Row 5: 서류 준비 현황 -->
+<div class="flex flex-col p-2.5 rounded-xl bg-surface-container-low/70">
+<span class="font-label-sm text-label-sm text-outline mb-1.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">fact_check</span>서류 준비 현황
+          </span>
+<div class="grid grid-cols-2 gap-2">
+<div class="flex items-center gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-secondary"></div>
+<span class="font-label-md text-label-md text-secondary font-bold">2/3 완료</span>
+</div>
+<div class="flex items-center gap-1.5">
+<div class="w-2.5 h-2.5 rounded-full bg-outline"></div>
+<span class="font-label-md text-label-md text-on-surface-variant font-bold">1/3 완료</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Export / Share Helper -->
+<div class="mt-4 pt-3 flex items-center justify-between bg-surface-container-lowest">
+<span class="font-body-sm text-body-sm text-on-surface-variant">비교표를 이미지나 PDF로 저장할까요?</span>
+<button class="inline-flex items-center gap-1 font-label-sm text-label-sm text-secondary hover:underline" type="button">
+<span>내보내기</span>
+<span class="material-symbols-outlined text-[16px]">file_download</span>
+</button>
+</div>
+</div>
+</section>
+</div>
+<script>
+  // Dynamic Tab and UI Synchronization for '내 공고'
+  (function () {
+    const navAnchors = document.querySelectorAll('nav[data-active-classes] a');
+    navAnchors.forEach((link) => {
+      const path = link.getAttribute('data-path');
+      if (path === '내-공고-목록') {
+        link.classList.remove('text-on-surface-variant');
+        link.classList.add('text-secondary', 'font-label-md');
+        const icon = link.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.style.fontVariationSettings = "'FILL' 1";
+        }
+      } else {
+        link.classList.remove('text-secondary', 'font-label-md');
+        link.classList.add('text-on-surface-variant');
+        const icon = link.querySelector('.material-symbols-outlined');
+        if (icon) {
+          icon.style.fontVariationSettings = "'FILL' 0";
+        }
+      }
+    });
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-label-md"><div class="max-w-[440px] mx-auto flex justify-around items-center h-20 px-space-md"><a class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="공고-분석-입력" href="#"><span class="material-symbols-outlined text-[24px]">edit_note</span><span class="font-label-sm text-label-sm">정리하기</span></a><a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl transition-colors text-secondary font-label-md" data-path="내-공고-목록" href="#"><span class="material-symbols-outlined text-[24px]">bookmarks</span><span class="font-label-sm text-label-sm">내 공고</span></a></div></nav></body></html>
+
+<!-- 공고 분석 입력 -->
+<!DOCTYPE html>
+
+<html lang="ko"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/><meta content="mobile_tab" name="shell-type"/><title>공고정리</title><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{width:100%;margin:0;padding:0;background-color:#f7f9fb;}body{overscroll-behavior-y:none;-webkit-tap-highlight-color:transparent;}.pb-safe{padding-bottom:env(safe-area-inset-bottom,0px);}.pt-safe{padding-top:env(safe-area-inset-top,0px);}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: 'class', theme: { extend: { colors: { 'tertiary-fixed-dim': '#62df7d', 'secondary': '#0051d5', 'on-tertiary-fixed-variant': '#005320', 'on-secondary-fixed-variant': '#003ea8', 'surface-container-low': '#f2f4f6', 'tertiary-container': '#002109', 'tertiary-fixed': '#7ffc97', 'on-tertiary': '#ffffff', 'surface-container-highest': '#e0e3e5', 'surface': '#f7f9fb', 'secondary-fixed-dim': '#b4c5ff', 'inverse-surface': '#2d3133', 'secondary-container': '#316bf3', 'on-primary-fixed-variant': '#3f465c', 'surface-container': '#eceef0', 'background': '#f7f9fb', 'secondary-fixed': '#dbe1ff', 'on-error': '#ffffff', 'error': '#ba1a1a', 'on-background': '#191c1e', 'primary-fixed-dim': '#bec6e0', 'on-primary-container': '#7c839b', 'on-surface': '#191c1e', 'primary-container': '#131b2e', 'on-surface-variant': '#45464d', 'on-secondary-fixed': '#00174b', 'inverse-primary': '#bec6e0', 'outline-variant': '#c6c6cd', 'primary': '#000000', 'surface-variant': '#e0e3e5', 'on-error-container': '#93000a', 'surface-dim': '#d8dadc', 'error-container': '#ffdad6', 'tertiary': '#000000', 'surface-container-high': '#e6e8ea', 'surface-bright': '#f7f9fb', 'inverse-on-surface': '#eff1f3', 'outline': '#76777d', 'on-tertiary-container': '#009842', 'primary-fixed': '#dae2fd', 'on-primary': '#ffffff', 'surface-tint': '#565e74', 'on-secondary': '#ffffff', 'on-primary-fixed': '#131b2e', 'surface-container-lowest': '#ffffff', 'on-secondary-container': '#fefcff', 'on-tertiary-fixed': '#002109' }, borderRadius: { 'DEFAULT': '0.25rem', 'lg': '0.5rem', 'xl': '0.75rem', 'full': '9999px' }, spacing: { 'margin': '1rem', 'space-sm': '0.5rem', 'gutter': '1rem', 'space-md': '1rem', 'space-xl': '2rem', 'space-xs': '0.25rem', 'space-lg': '1.5rem' }, fontFamily: { 'body-md': ['Plus Jakarta Sans'], 'headline-lg': ['Plus Jakarta Sans'], 'body-sm': ['Plus Jakarta Sans'], 'headline-md': ['Plus Jakarta Sans'], 'headline-xl': ['Plus Jakarta Sans'], 'body-lg': ['Plus Jakarta Sans'], 'label-md': ['Plus Jakarta Sans'], 'headline-sm': ['Plus Jakarta Sans'], 'label-sm': ['Plus Jakarta Sans'] }, fontSize: { 'body-md': ['14px', { lineHeight: '22px', letterSpacing: '0em', fontWeight: '400' }], 'headline-lg': ['24px', { lineHeight: '32px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-sm': ['13px', { lineHeight: '18px', letterSpacing: '0em', fontWeight: '400' }], 'headline-md': ['20px', { lineHeight: '28px', letterSpacing: '-0.015em', fontWeight: '600' }], 'headline-xl': ['30px', { lineHeight: '38px', letterSpacing: '-0.02em', fontWeight: '700' }], 'body-lg': ['16px', { lineHeight: '24px', letterSpacing: '-0.005em', fontWeight: '500' }], 'label-md': ['13px', { lineHeight: '16px', letterSpacing: '0.01em', fontWeight: '600' }], 'headline-sm': ['18px', { lineHeight: '26px', letterSpacing: '-0.01em', fontWeight: '600' }], 'label-sm': ['11px', { lineHeight: '14px', letterSpacing: '0.02em', fontWeight: '700' }] } } } };</script><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head><body class="bg-surface text-on-surface font-body-md text-body-md min-h-screen flex flex-col antialiased selection:bg-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl pt-safe shadow-[0_1px_8px_rgba(0,0,0,0.03)]"><div class="max-w-[440px] mx-auto h-16 px-gutter flex items-center justify-between"><div class="flex items-center gap-space-sm"><div class="w-9 h-9 rounded-lg bg-primary-container flex items-center justify-center"><span class="material-symbols-outlined text-secondary-fixed text-[20px]">checklist_rtl</span></div><div class="flex flex-col"><span class="font-headline-sm text-headline-sm text-on-surface tracking-tight leading-none">공고정리</span><span class="font-label-sm text-label-sm text-on-surface-variant leading-none mt-1">공고 분석 입력</span></div></div><div class="flex items-center gap-space-xs"><button aria-label="알림" class="w-11 h-11 flex items-center justify-center rounded-full text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[22px]">notifications</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></header><main class="flex-1 w-full max-w-[440px] mx-auto px-gutter pt-16 pb-24 bg-surface flex flex-col"><div class="flex flex-col w-full pb-8">
+<!-- Top Intro Section -->
+<section class="flex flex-col gap-space-xs mt-space-sm mb-space-lg">
+<div class="flex items-center gap-space-xs mb-space-xs">
+<span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-secondary-fixed text-on-secondary-fixed text-label-sm font-label-sm shadow-sm">
+<span class="material-symbols-outlined text-[14px] text-secondary" style="font-variation-settings: 'FILL' 1;">verified</span>
+        공기업·공공기관 전용 AI 분석기
+      </span>
+</div>
+<h1 class="text-headline-xl font-headline-xl text-primary tracking-tight leading-snug">
+      공고정리
+    </h1>
+<p class="text-body-md font-body-md text-on-surface-variant leading-relaxed">
+      긴 채용공고, 할 일만 남겨드려요
+    </p>
+</section>
+<!-- Quick Sample Trigger Banner -->
+<div class="mb-space-md">
+<button class="w-full flex items-center justify-between p-3.5 rounded-xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low transition-all active:scale-[0.99] text-left group" id="sample-fill-btn" type="button">
+<div class="flex items-center gap-2.5 min-w-0">
+<span class="w-7 h-7 rounded-lg bg-secondary/10 flex items-center justify-center text-secondary shrink-0 group-hover:scale-105 transition-transform">
+<span class="material-symbols-outlined text-[18px]">auto_awesome</span>
+</span>
+<div class="flex flex-col min-w-0">
+<span class="text-label-md font-label-md text-primary tracking-tight truncate">예시 공고로 바로 체험하기</span>
+<span class="text-body-sm font-body-sm text-on-surface-variant truncate">한국전력거래소 전기직렬 공고문 자동 입력</span>
+</div>
+</div>
+<span class="material-symbols-outlined text-outline text-[20px] shrink-0 group-hover:translate-x-0.5 transition-transform">chevron_right</span>
+</button>
+</div>
+<!-- Text Input Card -->
+<div class="flex flex-col rounded-2xl bg-surface-container-lowest p-5 shadow-sm mb-space-md relative transition-shadow focus-within:shadow-md">
+<div class="flex items-center justify-between mb-3">
+<label class="text-label-md font-label-md text-primary flex items-center gap-1.5" for="notice-textarea">
+<span class="material-symbols-outlined text-secondary text-[18px]">subject</span>
+        공고 텍스트 직접 입력
+      </label>
+<button class="inline-flex items-center gap-1 text-label-sm font-label-sm text-secondary hover:text-on-secondary-fixed-variant transition-colors active:opacity-70 bg-secondary-fixed/50 px-2 py-1 rounded-md" id="paste-clipboard-btn" type="button">
+<span class="material-symbols-outlined text-[14px]">content_paste</span>
+        클립보드 붙여넣기
+      </button>
+</div>
+<div class="relative w-full">
+<textarea class="w-full bg-surface-container-low/70 rounded-xl p-3.5 text-body-md font-body-md text-on-surface placeholder:text-outline/70 focus:outline-none focus:bg-surface-container-lowest transition-colors resize-none leading-relaxed" id="notice-textarea" maxlength="10000" placeholder="채용공고 내용을 붙여넣으세요
+
+예: 한국전력거래소 2026년 상반기 신입사원 채용공고..." rows="7"></textarea>
+</div>
+<!-- Textarea Footer: Char Counter -->
+<div class="flex items-center justify-between mt-3 pt-2 text-label-sm font-label-sm text-on-surface-variant">
+<span class="flex items-center gap-1 text-outline" id="field-hint">
+<span class="material-symbols-outlined text-[14px]">info</span>
+        직무 기술서 및 우대사항 포함 시 더 정밀해요
+      </span>
+<span class="font-medium tracking-tight" id="char-counter">0 / 10,000자</span>
+</div>
+</div>
+<!-- File Upload Card -->
+<div class="mb-space-lg">
+<label class="block text-label-md font-label-md text-primary mb-2 flex items-center gap-1.5 px-1">
+<span class="material-symbols-outlined text-secondary text-[18px]">cloud_upload</span>
+      공고 서류 간편 첨부
+    </label>
+<label class="flex flex-col items-center justify-center p-5 rounded-2xl bg-surface-container-lowest shadow-sm hover:bg-surface-container-low cursor-pointer transition-all active:scale-[0.99] group text-center" for="file-input">
+<input accept=".pdf,image/*" class="hidden" id="file-input" type="file"/>
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center mb-3 group-hover:scale-105 transition-transform text-secondary">
+<span class="material-symbols-outlined text-[26px]">attach_file_add</span>
+</div>
+<span class="text-label-md font-label-md text-primary mb-1">
+        PDF·이미지 올리기
+      </span>
+<span class="text-body-sm font-body-sm text-on-surface-variant">
+        공고문 PDF 또는 캡처 사진 지원 (최대 30MB)
+      </span>
+<div class="hidden mt-3 inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-tertiary-fixed text-on-tertiary-fixed text-label-sm font-label-sm animate-pulse" id="file-selected-status">
+<span class="material-symbols-outlined text-[15px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+<span id="file-name-text">파일이 첨부되었습니다</span>
+</div>
+</label>
+</div>
+<!-- Checklist & Delight Feature Micro-Preview Card -->
+<div class="p-4 rounded-xl bg-surface-container-low mb-space-lg flex items-start gap-3">
+<div class="w-8 h-8 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary shrink-0 mt-0.5">
+<span class="material-symbols-outlined text-[20px]">checklist</span>
+</div>
+<div class="flex flex-col gap-1 min-w-0">
+<span class="text-label-md font-label-md text-primary">정리하기 버튼을 누르면</span>
+<p class="text-body-sm font-body-sm text-on-surface-variant leading-snug">
+        서류 마감 D-Day, 어학 및 자격 커트라인, NCS 직무 키워드, 필수 제출서류 체크리스트를 즉시 생성합니다.
+      </p>
+</div>
+</div>
+<!-- Bottom CTA Container -->
+<div class="sticky bottom-20 pt-2 pb-1 bg-gradient-to-t from-surface via-surface to-transparent">
+<button class="w-full h-14 rounded-2xl bg-primary text-on-primary flex items-center justify-center gap-2 shadow-md hover:bg-on-surface transition-all active:scale-[0.98]" id="submit-analyze-btn" type="button">
+<span class="material-symbols-outlined text-[22px] text-secondary-fixed" style="font-variation-settings: 'FILL' 1;">bolt</span>
+<span class="text-label-md font-label-md text-on-primary text-[15px]">정리하기</span>
+</button>
+</div>
+</div>
+<script>
+  (() => {
+    // DOM Elements
+    const textarea = document.getElementById('notice-textarea');
+    const charCounter = document.getElementById('char-counter');
+    const pasteBtn = document.getElementById('paste-clipboard-btn');
+    const sampleFillBtn = document.getElementById('sample-fill-btn');
+    const fileInput = document.getElementById('file-input');
+    const fileStatus = document.getElementById('file-selected-status');
+    const fileNameText = document.getElementById('file-name-text');
+    const submitBtn = document.getElementById('submit-analyze-btn');
+
+    // Update character counter
+    const updateCount = () => {
+      const len = textarea.value.length;
+      charCounter.textContent = `${len.toLocaleString()} / 10,000자`;
+      if (len > 0) {
+        charCounter.classList.add('text-secondary');
+        charCounter.classList.remove('text-on-surface-variant');
+      } else {
+        charCounter.classList.remove('text-secondary');
+        charCounter.classList.add('text-on-surface-variant');
+      }
+    };
+
+    textarea.addEventListener('input', updateCount);
+
+    // Clipboard Paste Micro-interaction
+    pasteBtn.addEventListener('click', async () => {
+      try {
+        const text = await navigator.clipboard.readText();
+        if (text) {
+          textarea.value = text;
+          updateCount();
+          textarea.focus();
+        }
+      } catch (err) {
+        // Fallback for browsers with restricted clipboard permission
+        textarea.focus();
+      }
+    });
+
+    // Example 공고 fill
+    const sampleNotice = `[한국전력거래소(KPX) 2026년 상반기 신입직원 채용공고]
+1. 채용분야: 전기직(일반직 5급) 총 14명
+2. 원서접수: 2026. 04. 01(수) 10:00 ~ 2026. 04. 14(화) 17:00까지
+3. 지원자격
+ - 연령/학력: 제한 없음 (블라인드 채용)
+ - 어학성적: 토익 750점 이상 또는 오픽 IM2 이상
+ - 필수자격증: 전기기사 또는 전기산업기사 자격증 소지자
+4. 전형절차: 서류전형(30배수) > 필기전형(전공 50%, NCS 50%) > 면접전형(직무 및 종합인성)
+5. 우대사항: 발전소 운용 경험자, 한국사능력검정 1급, 컴활 1급`;
+
+    sampleFillBtn.addEventListener('click', () => {
+      textarea.value = sampleNotice;
+      updateCount();
+      textarea.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      textarea.focus();
+    });
+
+    // File selection UI feedback
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files && e.target.files[0];
+      if (file) {
+        fileNameText.textContent = `${file.name} (${(file.size / 1024 / 1024).toFixed(1)}MB)`;
+        fileStatus.classList.remove('hidden');
+      } else {
+        fileStatus.classList.add('hidden');
+      }
+    });
+
+    // CTA Tap Ripple / Transition Simulation
+    submitBtn.addEventListener('click', () => {
+      if (!textarea.value.trim() && (!fileInput.files || fileInput.files.length === 0)) {
+        textarea.classList.add('ring-2', 'ring-error');
+        textarea.focus();
+        setTimeout(() => {
+          textarea.classList.remove('ring-2', 'ring-error');
+        }, 1500);
+        return;
+      }
+
+      const originalHTML = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = `
+        <span class="material-symbols-outlined text-[20px] animate-spin text-secondary-fixed">progress_activity</span>
+        <span class="text-label-md font-label-md text-on-primary">공고 분석 및 일정 정리 중...</span>
+      `;
+      
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalHTML;
+      }, 1800);
+    });
+  })();
+</script></main><nav class="fixed bottom-0 inset-x-0 z-50 pb-safe bg-surface/90 backdrop-blur-xl shadow-[0_-2px_12px_rgba(0,0,0,0.04)]" data-active-classes="text-secondary font-label-md"><div class="max-w-[440px] mx-auto flex justify-around items-center h-20 px-space-md"><a aria-current="page" class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl transition-colors text-secondary font-label-md" data-path="공고-분석-입력" href="#"><span class="material-symbols-outlined text-[24px]">edit_note</span><span class="font-label-sm text-label-sm">정리하기</span></a><a class="flex flex-col items-center justify-center gap-1 w-20 h-14 rounded-xl text-on-surface-variant hover:text-on-surface transition-colors" data-path="내-공고-목록" href="#"><span class="material-symbols-outlined text-[24px]">bookmarks</span><span class="font-label-sm text-label-sm">내 공고</span></a></div></nav></body></html>
