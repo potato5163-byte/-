@@ -1,10 +1,6 @@
 // 주요 기업·공공기관의 채용 사이트. 목록에 없으면 구글 검색으로 대체한다.
 const RECRUIT_SITES: Record<string, string> = {
   // 공기업·공공기관
-  한국전력공사: 'http://recruit.kepco.co.kr',
-  한전: 'http://recruit.kepco.co.kr',
-  한국전력: 'http://recruit.kepco.co.kr',
-  KEPCO: 'http://recruit.kepco.co.kr',
   한국토지주택공사: 'https://apply.lh.or.kr',
   LH: 'https://apply.lh.or.kr',
   국민연금공단: 'https://nps.recruiter.co.kr/career/home',
